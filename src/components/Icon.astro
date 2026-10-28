@@ -1,0 +1,9 @@
+---
+/** Material Symbols Outlined, peso 100; família exibida no catálogo shadcn.io. */
+interface Props {
+  name: 'arrow_outward' | 'arrow_downward' | 'arrow_upward' | 'arrow_back' | 'add' | 'menu' | 'close';
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+---
+<span class:list={['material-symbol', className]} aria-hidden="true" translate="no">{name}</span>

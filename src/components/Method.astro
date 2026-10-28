@@ -1,0 +1,24 @@
+---
+import Icon from './Icon.astro';
+import { pillars } from '../data/content';
+---
+<section class="method section wrap" id="metodo" aria-labelledby="method-title">
+  <div class="section-heading" data-reveal><p class="eyebrow">O método REHAB</p><h2 id="method-title">Cinco pilares.<br /><span class="muted">Uma nova forma de liderar.</span></h2><p>Uma metodologia que conecta mentalidade, estrutura, pessoas, crescimento e sustentabilidade empresarial.</p></div>
+  <div class="method-scroll-stage">
+  <div class="method-explorer has-pillar-selection" data-method>
+    <div class="method-wheel" aria-label="Explore os cinco pilares">
+      <div class="wheel-ring ring-outer"></div><div class="wheel-ring ring-inner"></div>
+      <svg class="wheel-timeline" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <circle class="wheel-timeline-progress" cx="50" cy="50" r="38" transform="rotate(-90 50 50)" />
+        <circle class="wheel-timeline-dot" cx="50" cy="12" r="0.7" />
+      </svg>
+      <div class="wheel-center"><img src="/brand/logo-vertical.svg" width="165" height="165" alt="REHAB Clinic Club" /><span>Movimento contínuo.<br />Evolução com direção.</span></div>
+      {pillars.map((p,i) => <button class:list={['pillar-button', { active: i === 0 }]} style={`--i:${i}`} aria-controls={`pillar-${i}`} aria-expanded={i === 0 ? 'true' : 'false'} data-pillar={i} aria-label={`${p.letter} — ${p.title}`}><span>{p.letter}</span><small>{String(i+1).padStart(2,'0')}</small></button>)}
+    </div>
+    <p class="method-selection-hint">Selecione uma letra para conhecer cada pilar. <span aria-hidden="true"><Icon name="arrow_outward" class="icon-north-west" /></span></p>
+    <div class="pillar-panels">{pillars.map((p,i) => <article id={`pillar-${i}`} class:list={['pillar-panel', { selected:i===0 }]} aria-labelledby={`pillar-heading-${i}`}><div class="pillar-topline"><span>Pilar {String(i+1).padStart(2,'0')} / 05</span><span aria-hidden="true"><Icon name="arrow_outward" /></span></div><h3 id={`pillar-heading-${i}`}>{p.title}</h3><p class="pillar-description">{p.text}</p></article>)}</div>
+  </div>
+  </div>
+  <div class="method-mobile">{pillars.map((p,i)=><details open={i === 0}><summary><span class="mobile-letter">{p.letter}</span><span>{p.title}</span><span class="details-plus" aria-hidden="true"><Icon name="add" /></span></summary><div><p>{p.text}</p></div></details>)}</div>
+  <p class="method-close">Empresário transformado. Clínica blindada. <strong>Mais vidas transformadas.</strong></p>
+</section>

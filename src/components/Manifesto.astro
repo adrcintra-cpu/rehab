@@ -1,0 +1,11 @@
+---
+import { painPoints } from '../data/content';
+---
+<section class="manifesto section" id="manifesto" aria-labelledby="manifesto-title">
+ <div class="wrap editorial-grid" data-reveal>
+  <p class="eyebrow section-label">O momento da sua clínica</p>
+  <div><h2 id="manifesto-title">Quantas dessas situações<br /><span class="muted">fazem parte da sua vida hoje?</span></h2>
+   <div class="manifesto-text">{[painPoints.slice(0,3),painPoints.slice(3)].map(group=><div>{group.map(text=><p>{text}</p>)}</div>)}</div>
+  </div>
+ </div>
+</section>

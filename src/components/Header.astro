@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { navigation } from '../data/content';
+---
+<header class="site-header">
+  <div class="header-inner wrap">
+    <a class="brand" href="/#topo" aria-label="Rehab Clinic Club — início"><img src="/brand/logo-dark.svg" width="842" height="237" alt="REHAB Clinic Club" /></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav"><span>Menu</span><span class="menu-lines" aria-hidden="true"><Icon name="menu" class="menu-open-icon" /><Icon name="close" class="menu-close-icon" /></span></button>
+    <nav id="main-nav" aria-label="Navegação principal">
+      {navigation.map(item => <a href={item.href}>{item.label}</a>)}
+      <a class="nav-cta" href="#participar">Fazer minha aplicação <span aria-hidden="true"><Icon name="arrow_outward" /></span></a>
+    </nav>
+  </div>
+</header>

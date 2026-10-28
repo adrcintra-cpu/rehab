@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { pageCopy } from '../data/content';
+---
+<section class="hero hero-full" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="eyebrow-line"></span> Mentoria para donos de clínicas de reabilitação</p>
+    <h1 id="hero-title">{pageCopy.hero.headline}<br /><span>{pageCopy.hero.emphasis}</span></h1>
+    <p class="hero-description">{pageCopy.hero.complement} {pageCopy.hero.description}</p>
+    <div class="hero-actions"><a class="button" href="#participar">{pageCopy.hero.cta} <span aria-hidden="true"><Icon name="arrow_outward" /></span></a><a class="text-link" href="#metodo">Conheça o método <span aria-hidden="true"><Icon name="arrow_downward" /></span></a></div>
+    <p class="hero-signature">Your move. Your evolution.</p>
+  </div>
+  <div class="hero-art hero-art-photo">
+    <picture>
+      <img class="hero-photo" src="/images/rehab-banner-new-1024.webp" srcset="/images/rehab-banner-new-640.webp 640w, /images/rehab-banner-new-1024.webp 1024w, /images/rehab-banner-new-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Retrato institucional da REHAB Clinic Club, com duas mulheres em um ambiente que conecta clínica de reabilitação e gestão empresarial." fetchpriority="high" decoding="async" />
+    </picture>
+  </div>
+  <div class="hero-bottom"><span>Desenvolver o empresário. Fortalecer a empresa.</span><a href="#manifesto">Explore uma nova perspectiva <span aria-hidden="true"><Icon name="arrow_downward" /></span></a></div>
+</section>

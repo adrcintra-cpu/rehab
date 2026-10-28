@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import { config, challenges, pageCopy } from '../data/content';
+---
+<section class="conversion section wrap" id="participar" aria-labelledby="form-title">
+ <div class="conversion-copy" data-reveal><p class="eyebrow">Aplicação</p><h2 id="form-title">Você está a um passo<br /><span class="muted">do próximo movimento.</span></h2><p>{pageCopy.application.description}</p><p class="application-invitation">{pageCopy.application.invitation}</p><div class="conversion-signature"><span aria-hidden="true"><Icon name="arrow_outward" /></span><p>Uma nova visão.<br />Uma empresa mais forte.</p></div></div>
+ <form id="lead-form" data-endpoint={config.leadEndpoint} novalidate>
+  {!config.leadEndpoint && <p class="form-notice" id="form-availability">Inscrições online em preparação. O envio será disponibilizado após a configuração do canal de contato e a aprovação da Política de Privacidade.</p>}
+  <div class="form-fields"><div class="field"><label for="full-name">Nome completo</label><input id="full-name" name="name" autocomplete="name" required maxlength="120" placeholder="Como podemos chamar você?" aria-describedby="name-error" /><span class="field-error" id="name-error"></span></div>
+  <div class="field"><label for="clinic">Nome da clínica</label><input id="clinic" name="clinic" autocomplete="organization" required maxlength="160" placeholder="Sua clínica" aria-describedby="clinic-error" /><span class="field-error" id="clinic-error"></span></div>
+  <div class="field"><label for="email">E-mail profissional</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="voce@clinica.com.br" aria-describedby="email-error" /><span class="field-error" id="email-error"></span></div>
+  <div class="field"><label for="phone">WhatsApp</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" required maxlength="16" placeholder="(00) 00000-0000" aria-describedby="phone-error" /><span class="field-error" id="phone-error"></span></div>
+  <div class="field full"><label for="challenge">Principal desafio da clínica</label><select id="challenge" name="challenge" required aria-describedby="challenge-error"><option value="">Selecione o seu principal desafio</option>{challenges.map(c=><option value={c}>{c}</option>)}</select><span class="field-error" id="challenge-error"></span></div></div>
+  <div class="honey" aria-hidden="true"><label for="website">Deixe este campo vazio</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+  <div class="consent"><input type="checkbox" name="consent" id="consent" required aria-describedby="consent-error" /><label for="consent">Concordo com o tratamento dos meus dados para contato sobre o Rehab Clinic Club, conforme a <a href="/privacidade">Política de Privacidade</a>.</label></div><span id="consent-error" class="field-error"></span>
+  <button class="button submit-button" type="submit"><span data-submit-label>{pageCopy.application.cta}</span><span aria-hidden="true"><Icon name="arrow_outward" /></span></button>
+  <p class="application-helper">Leva menos de 3 minutos. Seus dados são usados apenas para contato sobre a sua aplicação.</p>
+  <p class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+ </form>
+</section>
