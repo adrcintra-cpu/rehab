@@ -41,7 +41,7 @@ function paint() {
   const raw = Math.max(0, Math.min(1, (pinTop - bounds.top) / travel));
   // Keep keyboard targets stable and fully visible as soon as the wheel is focused.
   const formation = Math.min(1, raw / .30);
-  const progress = wheel.querySelector(':focus-visible') ? 1 : formation;
+  const progress = wheel.contains(document.activeElement) ? 1 : formation;
   const reading = Math.max(0, Math.min(1, (raw - .30) / .70));
   // One fifth of the orbital path corresponds to each reading interval.
   // At 20%, 40%, 60% and 80%, the head reaches E, H, A and B exactly.
@@ -49,7 +49,8 @@ function paint() {
   const timelineAngle = (reading * 360 - 90) * Math.PI / 180;
   timelineDot?.setAttribute('cx', String(50 + Math.cos(timelineAngle) * 38));
   timelineDot?.setAttribute('cy', String(50 + Math.sin(timelineAngle) * 38));
-  const readingIndex = Math.min(nodes.length - 1, Math.floor(reading * nodes.length));
+  const focusedIndex = nodes.indexOf(document.activeElement as HTMLButtonElement);
+  const readingIndex = focusedIndex >= 0 ? focusedIndex : Math.min(nodes.length - 1, Math.floor(reading * nodes.length));
   if (readingIndex !== lastReadingIndex) {
     selectPillar(readingIndex);
     lastReadingIndex = readingIndex;
@@ -122,3 +123,8 @@ desktop.addEventListener('change', sync);
 reduced.addEventListener('change', sync);
 document.fonts.ready.then(schedule);
 sync();
+
+// Resume scroll reading after an explicit pointer selection.
+window.addEventListener('wheel', () => {
+  if (wheel?.contains(document.activeElement)) (document.activeElement as HTMLElement).blur();
+}, { passive: true });
