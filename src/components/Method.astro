@@ -19,6 +19,6 @@ import { pillars } from '../data/content';
     <div class="pillar-panels">{pillars.map((p,i) => <article id={`pillar-${i}`} class:list={['pillar-panel', { selected:i===0 }]} aria-labelledby={`pillar-heading-${i}`}><div class="pillar-topline"><span>Pilar {String(i+1).padStart(2,'0')} / 05</span><span aria-hidden="true"><Icon name="arrow_outward" /></span></div><h3 id={`pillar-heading-${i}`}>{p.title}</h3><p class="pillar-description">{p.text}</p></article>)}</div>
   </div>
   </div>
-  <div class="method-mobile">{pillars.map((p,i)=><details open={i === 0}><summary><span class="mobile-letter">{p.letter}</span><span>{p.title}</span><span class="details-plus" aria-hidden="true"><Icon name="add" /></span></summary><div><p>{p.text}</p></div></details>)}</div>
+  <div class="method-mobile">{pillars.map((p,i)=><details open={i === 0}><summary><span class="mobile-letter">{p.letter}</span><small>{String(i+1).padStart(2,'0')}</small><span>{p.title}</span><span class="details-plus" aria-hidden="true"><Icon name="add" /></span></summary><div><p>{p.text}</p></div></details>)}</div>
   <p class="method-close">Empresário transformado. Clínica blindada. <strong>Mais vidas transformadas.</strong></p>
 </section>

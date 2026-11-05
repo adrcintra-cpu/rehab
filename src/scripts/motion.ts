@@ -18,7 +18,7 @@ for (const heading of headings) {
       word.className = 'motion-word';
       const inner = document.createElement('span');
       inner.className = 'motion-word-inner'; inner.textContent = part;
-      inner.style.setProperty('--word-delay', `${Math.min(index * 45, 500)}ms`);
+      inner.style.setProperty('--word-delay', `${Math.min(index * 15, 120)}ms`);
       word.append(inner); fragment.append(word); index++;
     }
     node.replaceWith(fragment);
