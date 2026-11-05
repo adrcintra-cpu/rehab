@@ -5,7 +5,7 @@ import { painPoints } from '../data/content';
  <div class="wrap editorial-grid" data-reveal>
   <p class="eyebrow section-label">O momento da sua clínica</p>
   <div><h2 id="manifesto-title">Quantas dessas situações<br /><span class="muted">fazem parte da sua vida hoje?</span></h2>
-   <div class="manifesto-text">{painPoints.map((text,i)=><article class="pain-card"><span class="card-index">{String(i+1).padStart(2,'0')}</span><p>{text}</p></article>)}</div>
+   <div class="manifesto-text">{painPoints.map((text,i)=><article class="pain-card" style={`--card-order:${i};--card-layer:${i+1}`}><span class="card-index">{String(i+1).padStart(2,'0')}</span><p>{text}</p></article>)}</div>
   </div>
  </div>
 </section>

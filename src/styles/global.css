@@ -368,14 +368,12 @@ h3{font-size:23px;line-height:1.3;font-weight:500}
 .timeline li:last-child{padding-bottom:30px}
 @media(max-width:900px){.timeline li:last-child{padding-bottom:24px}}
 
-/* Dores: cards em camadas com destaque de superfície e profundidade. */
-.manifesto-text{gap:0 18px;padding:12px 0 18px;isolation:isolate}
-.pain-card{position:relative;min-height:230px;background:#e8dbcd;border:1px solid #d0b8a3;border-radius:4px;box-shadow:0 10px 24px rgba(53,34,25,.08);transition:transform .28s ease,box-shadow .28s ease,background .28s ease;z-index:1}
+/* Dores: empilhamento dos cards durante a rolagem. */
+.manifesto-text{display:flex;flex-direction:column;gap:32px;max-width:900px;margin:44px auto 0;padding-bottom:48px;isolation:isolate}
+.pain-card{position:sticky;top:calc(110px + var(--card-order)*14px);z-index:var(--card-layer);display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:28px;min-height:250px;padding:44px;background:#e8dbcd;border:1px solid #d0b8a3;border-radius:6px;box-shadow:0 12px 30px rgba(53,34,25,.12)}
 .pain-card:nth-child(even){background:#f0e6da}
-.pain-card:nth-child(n+4){margin-top:-12px;transform:translateX(10px);z-index:2}
-.pain-card .card-index{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--rose);border-radius:50%;background:var(--ink);color:var(--paper);font-weight:500}
-.pain-card p{font-weight:500;color:var(--ink);margin-top:22px}
-@media(hover:hover) and (pointer:fine){.pain-card:hover{transform:translateY(-12px);z-index:4;background:#f5ece2;box-shadow:0 20px 38px rgba(53,34,25,.16)}}
-@media(min-width:601px) and (max-width:900px){.pain-card:nth-child(n+3){margin-top:-10px;transform:translateX(5px)}}
-@media(max-width:600px){.manifesto-text{gap:0;padding-right:8px}.pain-card{min-height:0;padding:28px;box-shadow:0 8px 20px rgba(53,34,25,.1)}.pain-card:nth-child(n+2){margin-top:-10px;transform:translateX(4px)}.pain-card:nth-child(even){transform:translateX(8px)}.pain-card p{margin-top:18px}}
-@media(prefers-reduced-motion:reduce){.pain-card{transition:none}.pain-card:hover{transform:none}}
+.pain-card .card-index{display:flex;align-items:center;justify-content:center;width:54px;height:54px;border:1px solid var(--rose);border-radius:50%;background:var(--ink);color:var(--paper);font-size:17px;font-weight:500}
+.pain-card p{font-size:24px;line-height:1.5;font-weight:500;color:var(--ink);margin:0;max-width:680px}
+@media(max-width:900px){.pain-card{top:calc(92px + var(--card-order)*10px);padding:32px;min-height:230px;gap:24px}.pain-card p{font-size:21px}}
+@media(max-width:600px){.manifesto-text{gap:28px;padding-bottom:28px}.pain-card{grid-template-columns:1fr;gap:22px;min-height:250px;padding:28px;top:calc(90px + var(--card-order)*9px)}.pain-card p{font-size:19px;line-height:1.55}.pain-card .card-index{width:42px;height:42px;font-size:14px}}
+@media(prefers-reduced-motion:reduce){.pain-card{position:relative;top:auto}}
