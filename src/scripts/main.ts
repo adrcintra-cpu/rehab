@@ -116,3 +116,17 @@ if (form) {
     }
   });
 }
+
+// Program cards enter in sequence; all content remains available without motion.
+const programCards = [...document.querySelectorAll<HTMLElement>('[data-program-card]')];
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const programObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('program-entered');
+        programObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .08 });
+  programCards.forEach(card => { card.classList.add('program-pending'); programObserver.observe(card); });
+}
