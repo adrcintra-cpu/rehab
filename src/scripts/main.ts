@@ -130,3 +130,17 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   }, { threshold: .08 });
   programCards.forEach(card => { card.classList.add('program-pending'); programObserver.observe(card); });
 }
+
+// Mentor portraits and captions enter as a single composition from each side.
+const mentorProfiles = [...document.querySelectorAll<HTMLElement>('[data-mentor-reveal]')];
+if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const mentorObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('mentor-entered');
+        mentorObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .05, rootMargin: '0px 0px -30px 0px' });
+  mentorProfiles.forEach(profile => { profile.classList.add('mentor-pending'); mentorObserver.observe(profile); });
+}

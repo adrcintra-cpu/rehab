@@ -413,3 +413,13 @@ h3{font-size:23px;line-height:1.3;font-weight:500}
 .timeline li{gap:28px}
 @media(max-width:900px){.timeline .step-number,.timeline li.in-view .step-number{font-size:80px}}
 @media(max-width:600px){.timeline .step-number,.timeline li.in-view .step-number{font-size:88px}}
+
+/* Mentoras: cada composição entra de um lado ao aparecer na rolagem. */
+.mentors-grid{overflow:clip;overflow-clip-margin:12px}
+@media(prefers-reduced-motion:no-preference){
+ .mentor-pending{opacity:0;transform:translateX(-64px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+ .mentor-pending:nth-child(even){transform:translateX(64px)}
+ .mentor-pending.mentor-entered{opacity:1;transform:translateX(0)}
+}
+@media(max-width:600px){.mentor-pending{transform:translateX(-28px)}.mentor-pending:nth-child(even){transform:translateX(28px)}.mentor-pending.mentor-entered{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.mentor-pending,.mentor-pending:nth-child(even){opacity:1;transform:none;transition:none}}
