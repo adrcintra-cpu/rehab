@@ -407,3 +407,9 @@ h3{font-size:23px;line-height:1.3;font-weight:500}
 }
 @media(max-width:900px){.program-pending{transition-delay:0ms}}
 @media(prefers-reduced-motion:reduce){.program-pending{opacity:1;transform:none}.timeline .step-number{transition:none}}
+
+/* Numeração editorial ampla, sem círculos. */
+.timeline .step-number,.timeline li.in-view .step-number{display:block;width:auto;height:auto;min-height:0;border:0;border-radius:0;background:transparent;color:var(--rose);box-shadow:none;font-family:var(--body);font-size:96px;font-weight:300;line-height:1;letter-spacing:-.07em}
+.timeline li{gap:28px}
+@media(max-width:900px){.timeline .step-number,.timeline li.in-view .step-number{font-size:80px}}
+@media(max-width:600px){.timeline .step-number,.timeline li.in-view .step-number{font-size:88px}}
