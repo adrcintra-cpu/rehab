@@ -23,7 +23,7 @@ function paintMobile() {
 
 function paint() {
   frame = 0;
-  if (!desktop.matches) { paintMobile(); return; }
+  if (!desktop.matches && !enabled) { paintMobile(); return; }
   if (!enabled) {
     if (reduced.matches && desktop.matches) {
       const visible = [...document.querySelectorAll<HTMLElement>('.pillar-panel')].map((panel,index) => ({index,rect:panel.getBoundingClientRect()})).filter(({rect}) => rect.bottom > 90 && rect.top < innerHeight);
@@ -40,9 +40,10 @@ function paint() {
   const travel = Math.max(1, bounds.height - explorer.getBoundingClientRect().height);
   const raw = Math.max(0, Math.min(1, (pinTop - bounds.top) / travel));
   // Keep keyboard targets stable and fully visible as soon as the wheel is focused.
-  const formation = Math.min(1, raw / .30);
+  const formationEnd = desktop.matches ? .30 : .18;
+  const formation = Math.min(1, raw / formationEnd);
   const progress = wheel.contains(document.activeElement) ? 1 : formation;
-  const reading = Math.max(0, Math.min(1, (raw - .30) / .70));
+  const reading = Math.max(0, Math.min(1, (raw - formationEnd) / (1 - formationEnd)));
   // One fifth of the orbital path corresponds to each reading interval.
   // At 20%, 40%, 60% and 80%, the head reaches E, H, A and B exactly.
   wheel.style.setProperty('--timeline-offset', String((1 - reading) * 2 * Math.PI * 38));
@@ -64,7 +65,7 @@ function paint() {
   const size = wheelBounds.width;
   const stageWidth = explorerBounds.width;
   const wheelSlotCenter = wheel.offsetLeft + wheel.offsetWidth / 2;
-  const centerShift = stageWidth / 2 - wheelSlotCenter;
+  const centerShift = desktop.matches ? stageWidth / 2 - wheelSlotCenter : 0;
   wheel.style.setProperty('--wheel-shift', `${(centerShift * (1 - alignment)).toFixed(2)}px`);
   const startDiameter = Math.min(170, stageWidth * .135);
   const endDiameter = Math.min(96, Math.max(58, size * .17));
@@ -95,7 +96,7 @@ function schedule() {
   if (stage && !frame && !document.hidden) frame = requestAnimationFrame(paint);
 }
 function sync() {
-  enabled = desktop.matches && !reduced.matches;
+  enabled = !reduced.matches;
   stage?.classList.toggle('orbit-scroll-enabled', enabled);
   const mobile = !desktop.matches;
   stage?.classList.toggle('method-static-reading', desktop.matches && reduced.matches);
