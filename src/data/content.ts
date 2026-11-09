@@ -2,7 +2,6 @@ export const config = {
   name: 'REHAB Clinic Club',
   title: 'Rehab Clinic Club | Mentoria de Gestão para Clínicas',
   description: 'Mentoria em grupo para donos de clínicas de reabilitação que desejam atrair mais pacientes, melhorar a lucratividade e construir uma operação mais independente.',
-  signature: 'Your move. Your evolution.',
   // Configure no ambiente de build. O endpoint deve validar os dados no servidor.
   leadEndpoint: import.meta.env.PUBLIC_PRIVACY_APPROVED === 'true' ? (import.meta.env.PUBLIC_LEAD_ENDPOINT || '') : '',
   contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || '',

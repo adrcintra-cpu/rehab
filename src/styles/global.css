@@ -547,3 +547,5 @@ body{font-size:18px}
  .site-header #main-nav .nav-cta{margin-top:10px;justify-content:space-between;font-size:16px}
 }
 @media(prefers-reduced-motion:reduce){.site-header #main-nav,.site-header #main-nav>a{transition:none!important;transform:none!important}}
+
+@media(min-width:901px){.footer-main{grid-template-columns:1fr auto}}
