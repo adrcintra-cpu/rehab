@@ -423,3 +423,9 @@ h3{font-size:23px;line-height:1.3;font-weight:500}
 }
 @media(max-width:600px){.mentor-pending{transform:translateX(-28px)}.mentor-pending:nth-child(even){transform:translateX(28px)}.mentor-pending.mentor-entered{transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.mentor-pending,.mentor-pending:nth-child(even){opacity:1;transform:none;transition:none}}
+
+.program-icon{width:64px;height:64px;flex:none;color:var(--muted)}
+.timeline{align-items:start}
+.timeline li{height:auto;min-height:0}
+.timeline li:last-child{padding-bottom:30px}
+@media(max-width:900px){.program-icon{width:56px;height:56px}.timeline li:last-child{padding-bottom:24px}}
