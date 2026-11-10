@@ -3,8 +3,8 @@ export const config = {
   title: 'Rehab Clinic Club | Mentoria de Gestão para Clínicas',
   description: 'Mentoria em grupo para donos de clínicas de reabilitação que desejam atrair mais pacientes, melhorar a lucratividade e construir uma operação mais independente.',
   // Configure no ambiente de build. O endpoint deve validar os dados no servidor.
-  leadEndpoint: import.meta.env.PUBLIC_PRIVACY_APPROVED === 'true' ? (import.meta.env.PUBLIC_LEAD_ENDPOINT || '/api/lead') : '',
-  contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || '',
+  leadEndpoint: import.meta.env.PUBLIC_LEAD_ENDPOINT || '/api/lead',
+  contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL || 'alphaplaybrasil@gmail.com',
 };
 export const navigation = [
   { label: 'O método', href: '#metodo' },
