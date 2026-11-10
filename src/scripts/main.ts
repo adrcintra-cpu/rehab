@@ -102,15 +102,16 @@ if (form) {
       const url = new URL(endpoint, window.location.origin);
       if (url.protocol !== 'https:' && url.hostname !== 'localhost' && url.hostname !== '127.0.0.1') throw new Error('Invalid endpoint');
       const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': requestKey }, body: JSON.stringify({ ...payload, submittedAt: new Date().toISOString() }), signal: controller.signal });
-      if (!response.ok) throw new Error('Submission failed');
+      if (!response.ok) throw new Error(`Submission failed (${response.status})`);
       const receipt: unknown = await response.json();
       if (!receipt || typeof receipt !== 'object' || !('success' in receipt) || receipt.success !== true) throw new Error('Missing confirmation');
       setStatus('Solicitação recebida. A equipe entrará em contato com você.', 'success');
       form.reset(); form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
       form.dispatchEvent(new CustomEvent('rehab:lead-confirmed', { bubbles: true }));
       requestKey = ''; lastPayload = '';
-    } catch {
-      setStatus('Não foi possível confirmar o envio. Tente novamente em instantes. Seus dados permanecem no formulário.', 'error');
+    } catch (error) {
+      const code = error instanceof Error ? error.message.match(/Submission failed \((\d+)\)/)?.[1] : undefined;
+      setStatus(`Não foi possível confirmar o envio${code ? ` (código ${code})` : ''}. Tente novamente em instantes ou fale com a equipe pelo WhatsApp. Seus dados permanecem no formulário.`, 'error');
     } finally {
       clearTimeout(timeout); pending = false; submit.disabled = false; form.removeAttribute('aria-busy'); label.textContent = 'Fazer minha aplicação'; status.focus();
     }

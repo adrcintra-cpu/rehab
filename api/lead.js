@@ -5,7 +5,10 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ success: false });
   const allowed = new Set(['https://rehabclinicclub.com.br', 'https://www.rehabclinicclub.com.br', 'https://landing-rehab.vercel.app']);
   if (!allowed.has(req.headers.origin)) return res.status(403).json({ success: false });
-  if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL) return res.status(503).json({ success: false });
+  if (!process.env.RESEND_API_KEY || !process.env.RESEND_FROM_EMAIL) {
+    console.error('lead_configuration_missing', { apiKey: Boolean(process.env.RESEND_API_KEY), sender: Boolean(process.env.RESEND_FROM_EMAIL) });
+    return res.status(503).json({ success: false });
+  }
   const data = req.body;
   if (!data || typeof data !== 'object' || JSON.stringify(data).length > 12000) return res.status(400).json({ success: false });
   const text = key => typeof data[key] === 'string' ? data[key].trim() : '';
@@ -27,7 +30,10 @@ export default async function handler(req, res) {
       body: JSON.stringify(body), signal: AbortSignal.timeout(10000),
     });
     const result = await response.json();
-    if (!response.ok || !result.id) return res.status(502).json({ success: false });
+    if (!response.ok || !result.id) {
+      console.error('lead_provider_rejected', { status: response.status, code: result.name });
+      return res.status(502).json({ success: false });
+    }
     return res.status(200).json({ success: true });
   } catch { return res.status(502).json({ success: false }); }
 }
