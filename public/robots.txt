@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+
+Sitemap: https://www.rehabclinicclub.com.br/sitemap.xml

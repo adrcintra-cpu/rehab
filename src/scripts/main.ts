@@ -145,3 +145,12 @@ if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: re
   }, { threshold: .05, rootMargin: '0px 0px -30px 0px' });
   mentorProfiles.forEach(profile => { profile.classList.add('mentor-pending'); mentorObserver.observe(profile); });
 }
+
+// Somente conversões confirmadas; não enviar dados pessoais ao dataLayer.
+const analyticsWindow = window as Window & { dataLayer?: Record<string, unknown>[] };
+document.addEventListener('rehab:lead-confirmed', () => {
+  (analyticsWindow.dataLayer ||= []).push({ event: 'generate_lead', form_name: 'rehab_application' });
+});
+document.querySelector('.whatsapp-float')?.addEventListener('click', () => {
+  (analyticsWindow.dataLayer ||= []).push({ event: 'whatsapp_click', link_location: 'floating_button' });
+});
